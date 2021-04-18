@@ -1,0 +1,147 @@
+<!--
+  ~  Cube Colouring Game
+  ~  Copyright (c) Luke Denton
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation; either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cube Colouring Game</title>
+  <meta name="description" content="How fast can you colour in all the spheres in this cube?">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Cube Colouring Game">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <script src="/js/vendor/error-capture.min.js"></script>
+  <script>
+    if (location.hostname !== 'localhost') {
+      Bugsnag.start({ apiKey: '' })
+    }
+  </script>
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/img/icons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ff0000">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <div class="dialog" data-js="welcome">
+    <h1>Cube Colouring Game</h1>
+    <h2>How fast can you colour in all of the spheres making up this cube?</h2>
+    <p>Use your mouse cursor to move over the spheres and colour them in</p>
+    <p>There are 1000 spheres</p>
+    <p>As soon as you colour in your first sphere, the timer will start</p>
+    <h3>Do you have what it takes to top the leaderboard?</h3>
+    <p><small><em>Be sure you're ready when you click the button, your mouse will start on the cube and you'll be straight into colouring!</em></small></p>
+    <p><button class="start-app-button" data-js="start-app">I'm Ready</button></p>
+    <p><button class="view-leaderboard-button" data-js="view-leaderboard">View Leaderboard</button></p>
+    <p><button data-js="colour-settings-button">Click here if you have difficulty seeing some colours</button></p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <img class="icon" src="./img/target.svg" alt="target">
+      <div><span data-js="coloured-count">0</span>/1000</div>
+    </div>
+    <div class="stat">
+      <img class="icon" src="./img/stopwatch.svg" alt="stopwatch">
+      <div data-js="stopwatch">0</div>
+    </div>
+    <button data-js="reset-app">Restart</button>
+  </div>
+
+  <div class="controls">
+    <p>Controls</p>
+    <div>
+      <img class="icon" src="./img/left-click.svg" title="Left Click Rotates" alt="left-click-rotates">
+      <img class="icon" src="./img/right-click.svg" title="Right Click Pans" alt="right-click-pans">
+    </div>
+  </div>
+
+  <div class="dialog" data-js="completed" hidden>
+    <form class="save-score-form" id="save-score-form">
+      <h1>Congratulations!</h1>
+      <p>You've managed to colour in all of the spheres</p>
+      <h2>Your final time is <span data-js="final-time"><!-- Will be filled in by JS --></span></h2>
+      <p>Enter your name below and add your time to the leaderboard!</p>
+      <p><em>Please only use alphanumeric characters, i.e. A-z, 0-9, space, underscore or hyphen</em></p>
+      <div>
+        <input type="text" id="player-name" placeholder="Enter Your Name">
+        <button type="submit">Save</button>
+      </div>
+    </form>
+    <div data-js="thank-you-message" hidden>
+      <h1>Thank you! Your score has been added.</h1>
+      <h3>Check the leaderboard to see if you've made it to the top!</h3>
+    </div>
+    <p><button data-js="view-leaderboard">View Leaderboard</button></p>
+    <button data-js="reset-app">Try Again</button>
+  </div>
+
+  <div class="dialog" data-js="leaderboard-dialog" hidden>
+    <h1>Leaderboard</h1>
+    <ol data-js="leaderboard">
+      <!-- Will be populated using JS -->
+    </ol>
+    <template id="leaderboard-template">
+      <li></li>
+    </template>
+    <button data-js="closer-leaderboard">Close</button>
+  </div>
+
+  <div class="dialog" data-js="colour-settings-dialog" hidden>
+    <h1>Colour Select</h1>
+    <p>Please select the colour you wish to use when colouring in the spheres</p>
+    <p><input type="color" value="#BADA55" id="colour-selector" class="colour-selector"></p>
+    <p><button data-js="closer-colour-settings">Save</button></p>
+    <p><button data-js="reset-preferred-colour" title="Reset back to default colour">Reset Color</button></p>
+  </div>
+
+  <footer data-js="footer">
+    <div class="version-info">Version 0.1.0</div>
+    <div class="contact-info">Issues/Suggestions? Email <a href="mailto:cubecolouring@iamlukedenton.com">cubecolouring@iamlukedenton.com</a></div>
+    <div class="author-info">Created by the <a href="https://threejs.org/" target="_blank" rel="nofollow noopener">ThreeJS team</a>, gamified by Luke Denton</div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script>
+    if (location.hostname !== 'localhost') {
+      window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+      ga('create', 'UA-XXXXXXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+    }
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "cube-colouring-game",
+  "version": "0.0.1",
+  "description": "A game in which you colour in a cube of spheres",
+  "keywords": [
+    "threejs",
+    "colouring"
+  ],
+  "license": "",
+  "author": "Luke Denton <hi@iamlukedenton.com>",
+  "scripts": {
+    "build": "parcel build index.html",
+    "dev": "parcel index.html --open",
+    "start": "npm run build && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "firebase": "^8.4.1",
+    "party-js": "^1.0.4",
+    "three": "^0.127.0"
+  }
+}

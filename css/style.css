@@ -1,0 +1,109 @@
+/*
+ *  Cube Colouring Game
+ *  Copyright (c) Luke Denton
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+body {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #EEEEEE;
+}
+
+.start-app-button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+}
+
+.view-leaderboard-button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+}
+
+.stats {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #FFFFFF;
+}
+
+.controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.stat {
+  display: flex;
+  font-size: 40px;
+  padding-bottom: 5px;
+}
+
+.icon {
+  width: 40px;
+  margin-right: 1ch;
+}
+
+.save-score-form {
+  display: contents;
+}
+
+.colour-selector {
+  width: 100px;
+  height: 40px;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  background-color: #FFFFFF;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+.author-info {
+  text-align: right;
+}
